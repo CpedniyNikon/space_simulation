@@ -1,6 +1,6 @@
 {
-    "name": "space_simulation",
-    "short_name": "space_simulation",
+    "name": "weather",
+    "short_name": "weather",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
