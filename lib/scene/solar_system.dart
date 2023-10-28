@@ -10,7 +10,6 @@ import 'package:space_simulation/scene/utils/sun.dart';
 class SolarSystem extends FlameGame {
   late Background background;
   late Sun sun;
-  late AppendPlanetButton appendPlanetButton;
   late double screenWidth;
   late double screenHeight;
 
@@ -25,12 +24,17 @@ class SolarSystem extends FlameGame {
 
     background = Background(0, 0);
     sun = Sun(screenWidth / 2, screenHeight / 2);
-    appendPlanetButton = AppendPlanetButton(screenWidth - 35, screenHeight - 35);
 
     add(background);
     add(sun);
     // add(appendPlanetButton);
 
+  }
+  @override
+  void update(double dt) {
+    screenWidth = size[0];
+    screenHeight = size[1];
+    super.update(dt);
   }
 }
 

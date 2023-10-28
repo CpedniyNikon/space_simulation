@@ -1,8 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:space_simulation/scene/solar_system.dart';
-import 'package:space_simulation/scene/utils/options_overlay.dart';
-import 'package:space_simulation/scene/utils/planet_info.dart';
+import 'package:space_simulation/scene/utils/append_planet_button.dart';
 
 class MyGame extends StatelessWidget {
   final FlameGame solarSystem = SolarSystem();
@@ -22,20 +21,7 @@ class MyGame extends StatelessWidget {
             Positioned(
               top: 10,
               right: 10,
-              child: ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (ctx) => AlertDialog(
-                      backgroundColor: Colors.greenAccent,
-                      title: OptionsOverlay(
-                        solarSystem: solarSystem,
-                      ),
-                    ),
-                  );
-                },
-                child: const Text("add planet"),
-              ),
+              child: AppendPlanetButton(solarSystem: solarSystem),
             ),
           ],
         ),

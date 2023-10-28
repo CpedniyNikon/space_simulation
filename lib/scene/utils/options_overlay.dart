@@ -6,16 +6,16 @@ import 'package:space_simulation/scene/utils/planet.dart';
 import 'package:space_simulation/scene/utils/planet_info.dart';
 
 class OptionsOverlay extends StatelessWidget {
-  late FlameGame solarSystem;
+  final FlameGame solarSystem;
 
-  OptionsOverlay({super.key, required this.solarSystem});
+  const OptionsOverlay({super.key, required this.solarSystem});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 180),
+          constraints: const BoxConstraints(maxWidth: 240),
           child: TextField(
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(27),
@@ -45,7 +45,7 @@ class OptionsOverlay extends StatelessWidget {
           height: 10,
         ),
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 180),
+          constraints: const BoxConstraints(maxWidth: 220),
           child: TextField(
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(27),
@@ -75,7 +75,7 @@ class OptionsOverlay extends StatelessWidget {
           height: 10,
         ),
         ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 180),
+          constraints: const BoxConstraints(maxWidth: 200),
           child: TextField(
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(27),
@@ -105,6 +105,9 @@ class OptionsOverlay extends StatelessWidget {
           height: 20,
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.transparent,
+          ),
           onPressed: () {
             if (int.parse(PlanetInfo.type.text) >= 1 &&
                 int.parse(PlanetInfo.type.text) <= 3) {

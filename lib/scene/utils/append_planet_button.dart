@@ -1,39 +1,35 @@
-import 'package:flame/components.dart';
-import 'package:flame/events.dart';
-import 'package:space_simulation/scene/solar_system.dart';
-import 'package:space_simulation/scene/utils/planet.dart';
-import 'package:space_simulation/scene/utils/planet_info.dart';
+import 'package:flame/game.dart';
+import 'package:flutter/material.dart';
+import 'package:space_simulation/scene/utils/options_overlay.dart';
 
-class AppendPlanetButton extends SpriteComponent
-    with HasGameRef<SolarSystem>, TapCallbacks {
-  late Vector2 pos;
+class AppendPlanetButton extends StatelessWidget {
+  final FlameGame solarSystem;
 
-  AppendPlanetButton(double x, double y) : super() {
-    pos = Vector2(x, y);
-  }
+  const AppendPlanetButton({super.key, required this.solarSystem});
 
   @override
-  Future<void> onLoad() async {
-    await super.onLoad();
-
-    sprite = await gameRef.loadSprite('appendButton.png');
-    size = Vector2(50, 50);
-    position = Vector2(pos.x - 25, pos.y - 25);
-  }
-
-  @override
-  void onTapDown(TapDownEvent event) {
-    super.onTapDown(event);
-    if (int.parse(PlanetInfo.type.text) >= 1 &&
-        int.parse(PlanetInfo.type.text) <= 3) {
-      final planet = Planet(
-          gameRef.screenWidth / 2 + int.parse(PlanetInfo.distance.text),
-          gameRef.screenHeight / 2 + int.parse(PlanetInfo.distance.text),
-          double.parse(PlanetInfo.size.text),
-          double.parse(PlanetInfo.size.text),
-          int.parse(PlanetInfo.type.text),
-          1);
-      gameRef.add(planet);
-    }
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            backgroundColor: Colors.transparent,
+            title: OptionsOverlay(
+              solarSystem: solarSystem,
+            ),
+          ),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.transparent,
+      ),
+      child: const Text(
+        "add planet",
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+    );
   }
 }

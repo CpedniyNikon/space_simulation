@@ -19,8 +19,8 @@ class Sun extends SpriteComponent with HasGameRef<SolarSystem> {
 
   @override
   void update(double dt) {
-    // position =
-    //     Vector2(gameRef.screenWidth / 2 - 100 / 2, gameRef.screenHeight / 2 - 100 / 2);
+    pos = Vector2(gameRef.screenWidth / 2, gameRef.screenHeight / 2);
+    position = Vector2(pos.x-50, pos.y-50);
     super.update(dt);
   }
 }
