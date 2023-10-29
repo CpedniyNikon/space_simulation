@@ -1,7 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:space_simulation/scene/solar_system.dart';
-import 'package:space_simulation/scene/utils/append_planet_button.dart';
+import 'package:space_simulation/scene/utils/append_planet_menu.dart';
 
 class MyGame extends StatelessWidget {
   final FlameGame solarSystem = SolarSystem();
@@ -21,7 +21,7 @@ class MyGame extends StatelessWidget {
             Positioned(
               top: 10,
               right: 10,
-              child: AppendPlanetButton(solarSystem: solarSystem),
+              child: AppendPlanetMenu(solarSystem: solarSystem),
             ),
           ],
         ),

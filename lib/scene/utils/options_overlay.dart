@@ -2,7 +2,9 @@ import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:space_simulation/scene/solar_system.dart';
+import 'package:space_simulation/scene/utils/append_planet_button.dart';
 import 'package:space_simulation/scene/utils/planet.dart';
+import 'package:space_simulation/scene/utils/planet_data_textfield.dart';
 import 'package:space_simulation/scene/utils/planet_info.dart';
 
 class OptionsOverlay extends StatelessWidget {
@@ -16,29 +18,9 @@ class OptionsOverlay extends StatelessWidget {
       children: [
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 240),
-          child: TextField(
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(27),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.grey,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.green,
-                  width: 3,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              hintText: "planet type [1-3]",
-              hintStyle: const TextStyle(color: Colors.grey),
-            ),
-            style: const TextStyle(color: Colors.black),
+          child: PlanetDataTextField(
+            title: "planet type [1-3]",
             controller: PlanetInfo.type,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
         ),
         const SizedBox(
@@ -46,29 +28,9 @@ class OptionsOverlay extends StatelessWidget {
         ),
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 220),
-          child: TextField(
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(27),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.grey,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.green,
-                  width: 3,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              hintText: "distance to sun",
-              hintStyle: const TextStyle(color: Colors.grey),
-            ),
-            style: const TextStyle(color: Colors.black),
+          child: PlanetDataTextField(
+            title: "distance to sun",
             controller: PlanetInfo.distance,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
         ),
         const SizedBox(
@@ -76,53 +38,16 @@ class OptionsOverlay extends StatelessWidget {
         ),
         ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 200),
-          child: TextField(
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.all(27),
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.grey,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.green,
-                  width: 3,
-                ),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              hintText: "planet size",
-              hintStyle: const TextStyle(color: Colors.grey),
-            ),
-            style: const TextStyle(color: Colors.black),
+          child: PlanetDataTextField(
+            title: "size of planet",
             controller: PlanetInfo.size,
-            inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           ),
         ),
         const SizedBox(
           height: 20,
         ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-          ),
-          onPressed: () {
-            if (int.parse(PlanetInfo.type.text) >= 1 &&
-                int.parse(PlanetInfo.type.text) <= 3) {
-              final planet = Planet(
-                  solarSystem.size[0] / 2 + int.parse(PlanetInfo.distance.text),
-                  solarSystem.size[1] / 2 + int.parse(PlanetInfo.distance.text),
-                  double.parse(PlanetInfo.size.text),
-                  double.parse(PlanetInfo.size.text),
-                  int.parse(PlanetInfo.type.text),
-                  1);
-              solarSystem.add(planet);
-              Navigator.pop(context, SolarSystem());
-            }
-          },
-          child: const Text("add"),
+        AppendPlanetButton(
+          solarSystem: solarSystem,
         ),
       ],
     );

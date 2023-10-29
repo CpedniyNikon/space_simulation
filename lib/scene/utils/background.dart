@@ -13,7 +13,7 @@ class Background extends SpriteComponent with HasGameRef<SolarSystem>{
     await super.onLoad();
 
     sprite = await gameRef.loadSprite('space.png');
-    size = Vector2(2000,1000  );
+    size = Vector2(2000,1000);
     position = pos;
   }
 
