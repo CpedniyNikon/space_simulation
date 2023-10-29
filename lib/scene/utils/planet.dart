@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:matrices/matrices.dart';
 import 'package:space_simulation/scene/solar_system.dart';
 

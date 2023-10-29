@@ -1,16 +1,15 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:space_simulation/scene/solar_system.dart';
 import 'package:space_simulation/scene/utils/append_planet_button.dart';
-import 'package:space_simulation/scene/utils/planet.dart';
 import 'package:space_simulation/scene/utils/planet_data_textfield.dart';
-import 'package:space_simulation/scene/utils/planet_info.dart';
 
 class OptionsOverlay extends StatelessWidget {
   final FlameGame solarSystem;
+  final planetTypeController = TextEditingController();
+  final planetDistanceController = TextEditingController();
+  final planetSizeController = TextEditingController();
 
-  const OptionsOverlay({super.key, required this.solarSystem});
+  OptionsOverlay({super.key, required this.solarSystem});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class OptionsOverlay extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 240),
           child: PlanetDataTextField(
             title: "planet type [1-3]",
-            controller: PlanetInfo.type,
+            controller: planetTypeController,
           ),
         ),
         const SizedBox(
@@ -30,7 +29,7 @@ class OptionsOverlay extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 220),
           child: PlanetDataTextField(
             title: "distance to sun",
-            controller: PlanetInfo.distance,
+            controller: planetDistanceController,
           ),
         ),
         const SizedBox(
@@ -40,7 +39,7 @@ class OptionsOverlay extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 200),
           child: PlanetDataTextField(
             title: "size of planet",
-            controller: PlanetInfo.size,
+            controller: planetSizeController,
           ),
         ),
         const SizedBox(
@@ -48,6 +47,9 @@ class OptionsOverlay extends StatelessWidget {
         ),
         AppendPlanetButton(
           solarSystem: solarSystem,
+          planetTypeController: planetTypeController,
+          planetDistanceController: planetDistanceController,
+          planetSizeController: planetSizeController,
         ),
       ],
     );

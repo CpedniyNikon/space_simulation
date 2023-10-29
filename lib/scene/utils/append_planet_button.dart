@@ -1,15 +1,19 @@
-import 'package:flame/components.dart';
-import 'package:flame/experimental.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:space_simulation/scene/solar_system.dart';
-import 'package:space_simulation/scene/utils/options_overlay.dart';
 import 'package:space_simulation/scene/utils/planet.dart';
-import 'package:space_simulation/scene/utils/planet_info.dart';
 
 class AppendPlanetButton extends StatelessWidget {
   final FlameGame solarSystem;
-  const AppendPlanetButton({super.key, required this.solarSystem});
+  final TextEditingController planetTypeController;
+  final TextEditingController planetDistanceController;
+  final TextEditingController planetSizeController;
+
+  const AppendPlanetButton({super.key, required this.solarSystem,
+    required this.planetTypeController,
+    required this.planetDistanceController,
+    required this.planetSizeController});
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +22,19 @@ class AppendPlanetButton extends StatelessWidget {
         backgroundColor: Colors.transparent,
       ),
       onPressed: () {
-        if (int.parse(PlanetInfo.type.text) >= 1 &&
-            int.parse(PlanetInfo.type.text) <= 3) {
+        final planetType = int.parse(planetTypeController.text);
+        final planetDistance = double.parse(planetDistanceController.text);
+        final planetSize = double.parse(planetSizeController.text);
+
+        if (planetType >= 1 &&
+            planetType <= 3) {
           final planet = Planet(
-              solarSystem.size[0] / 2 + int.parse(PlanetInfo.distance.text),
-              solarSystem.size[1] / 2 + int.parse(PlanetInfo.distance.text),
-              double.parse(PlanetInfo.size.text),
-              double.parse(PlanetInfo.size.text),
-              int.parse(PlanetInfo.type.text),
-              1);
+              solarSystem.size[0] / 2 + planetDistance,
+              solarSystem.size[1] / 2 + planetDistance,
+              planetSize,
+              planetSize,
+              planetType,
+              1.0);
           solarSystem.add(planet);
           Navigator.pop(context, SolarSystem());
         }

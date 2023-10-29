@@ -1,6 +1,3 @@
-
-import 'package:flame/camera.dart';
-import 'package:flame/experimental.dart';
 import 'package:flame/game.dart';
 import 'package:space_simulation/scene/utils/background.dart';
 import 'package:space_simulation/scene/utils/sun.dart';
